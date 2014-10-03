@@ -6,7 +6,7 @@ Description: Basically, group VDS sites and WIM sites and recommend new CVDS
     sites
 Depends:
     R (>= 3.1.1)
-License: GPLv2
+License: GPL-2  | file LICENSE
 LazyData: true
 Suggests:
     testthat
