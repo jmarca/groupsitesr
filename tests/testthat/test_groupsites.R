@@ -1,8 +1,8 @@
-wim.df <- load('./wim.df.R')
-sample.data.1 <- load('./sample.data.1.R')
-sample.data.30 <- load('./sample.data.30.R')
+res <- load(file='./wim.df.R')
+res <- load(file='./sample.data.1.R')
+res <- load(file='./sample.data.30.R')
+res <- load(file='./sample.data.405.R')
 
-sample.data.405 <- load('./sample.data.405.R')
 
 test_that('fixup priority sites works as expected',{
 
@@ -12,6 +12,7 @@ test_that('fixup priority sites works as expected',{
                              ,freeway=sample.data.405@data$freeway_id[1]
                              ,pv=priority.vds.sites
                              ,pw=wim.df)
+
     expect_that(priority.vds.sites,equals(l[['allowed.vds']]))
     expect_that(dim(l[['allowed.wim']]),equals(c(2,9)))
 
@@ -75,8 +76,8 @@ test_that('matching sites code works as expected',{
 
     ## now with the wim.match.idx, get a different result
     l <- match.sites(allowed.vds,dfv,16,wim.match.idx)
-    expect_that(levels(as.factor(l[['other.sites']]@data$group))
-               ,equals(c("717758",  "1211066")))
+    expect_that(sort(levels(as.factor(l[['other.sites']]@data$group)))
+               ,equals(sort(c("717758",  "1211066","wim.112.N", "wim.13.N"))))
     expect_that(sum(is.na(l[['other.sites']]@data$group)),equals(12))
 
     current.matched <- l[['already.covered']]
@@ -132,14 +133,14 @@ test_that('groupsites will assign values to all locations',{
     expect_that(is.element(c("wim.112.N","wim.13.N"),df$group)
                 ,equals(c(TRUE,TRUE)))
     expect_is(df,"data.frame")
-    expect_that(sum(is.na(l[['other.sites']]@data$group)),equals(0))
+    expect_that(sum(is.na(df$group)),equals(0))
 })
 
 
-test_that('groupsites will assign values to all locations',{
+test_that('groupsites will assign values to all locations take 2',{
     df <- groupsites(as.data.frame(sample.data.1),16,wim.df)
     expect_that(dim(df),equals(c(18,18)))
-    expect_that(sum(is.na(l[['other.sites']]@data$group)),equals(0))
+    expect_that(sum(is.na(df$group)),equals(0))
     ## expect_that(df$group) is not NA...
 })
 
