@@ -3,10 +3,12 @@ res <- load(file='./sample.data.1.R')
 res <- load(file='./sample.data.30.R')
 res <- load(file='./sample.data.405.R')
 
+priority.vds.sites <- as.data.frame(sample.data.405)[c(1,80,120),]
+sp::coordinates(priority.vds.sites) <- c('coords.x1','coords.x2')
+sp::proj4string(priority.vds.sites) <- sp::proj4string(sample.data.405)
 
 test_that('fixup priority sites works as expected',{
 
-    priority.vds.sites <- sample.data.405[c(1,80,120),]
 
     l <- fixup.priority.sites(direction=sample.data.405@data$freeway_dir[1]
                              ,freeway=sample.data.405@data$freeway_id[1]
@@ -46,7 +48,6 @@ test_that('fixup priority sites works as expected',{
 
 test_that('matching sites code works as expected',{
 
-    priority.vds.sites <- sample.data.405[c(1,80,120),]
 
     l <- fixup.priority.sites(direction=sample.data.405@data$freeway_dir[1]
                              ,freeway=sample.data.405@data$freeway_id[1]
@@ -124,6 +125,7 @@ test_that('matching sites code works as expected',{
 
 })
 
+print('group sites tests')
 
 test_that('groupsites will assign values to all locations',{
     df <- groupsites(as.data.frame(sample.data.405),16,wim.df)
@@ -167,7 +169,6 @@ test_that('groupsites works without a wim data set',{
 
 test_that('specific VDS sites can be chosen',{
 
-    priority.vds.sites <- sample.data.405[c(1,80,120),]
 
     df <- groupsites(as.data.frame(sample.data.405),16,priority.vds.sites)
 
@@ -178,7 +179,6 @@ test_that('specific VDS sites can be chosen',{
 
 test_that('One can mix vds and wim sites in the priority set',{
 
-    priority.vds.sites <- sample.data.405[c(1,80,120),]
 
     df <- groupsites(as.data.frame(sample.data.405),16,priority.vds.sites)
 

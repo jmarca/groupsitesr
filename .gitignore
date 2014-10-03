@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 *~
+/groupsitesr.Rcheck/
+/groupsitesr_0.1.tar.gz

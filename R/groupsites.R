@@ -135,7 +135,7 @@ groupsites <- function(dfv,distance=16
 
     ## re-create spatial points data frame objects
     sp::coordinates(dfv) <- c('coords.x1','coords.x2')
-    proj4string(dfv) <- p4s
+    sp::proj4string(dfv) <- p4s
 
     ## catch possible positional errors in vds, wim
     ## ducktyping here
