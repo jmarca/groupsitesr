@@ -1,0 +1,11 @@
+Package: groupsitesr
+Title: This package exists to test my code properly
+Version: 0.1
+Authors@R: "James Marca <james@activimetrics.com> [aut, cre]"
+Description: Basically, group VDS sites and WIM sites and recommend new CVDS sites
+Depends: R (>= 3.1.1)
+License: GPLv2
+LazyData: true
+Suggests: testthat
+Imports: sp,
+    plyr
