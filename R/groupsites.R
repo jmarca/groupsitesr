@@ -70,7 +70,7 @@ match.sites <- function(target.sites,other.sites,distance,already.covered){
     if(dim(target.sites)[1]==0)
         return (list('other.sites'=other.sites,'already.covered'=already.covered))
 
-    target.other.km <- spDists(target.sites
+    target.other.km <- sp::spDists(target.sites
                               ,other.sites
                               ,longlat=TRUE)
     close.idx <- target.other.km < distance
