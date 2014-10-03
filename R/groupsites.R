@@ -108,6 +108,19 @@ match.sites <- function(target.sites,other.sites,distance,already.covered){
     return (list('other.sites'=other.sites,'already.covered'=already.covered))
 }
 
+#' groupsites
+#'
+#' Group together sites to choose the best sites as CVDS
+#'
+#' @param dfv the VDS sites, as a dataframe.  Ideally these should have just one freeway and direction.  Use plyr to get this to happen
+#' @param distance the max distance from the candidate CVDS site
+#' @param wim.priority.sites,vds.priority.sites  SpatialPointsDataFrame objects containing the WIM sites, and/or the preferred VDS sites to use.  The VDS sites do not have to overlap with the sites in dfv.  Neither set is required.  Also, both will be trimmed to make sure that the same freeway and direction are used as for the vds sites themselves
+#' @return a dataframe, mostly the same as the input dfv, but with a new column called "group" added that contains the wim or vds site that is used to group each of the sites.
+#' @examples
+#' \donttest{
+#' newdf <- groupsites(vdf,distance=10,wim.priority.sites=all.the.wims)
+#' }
+#' @export
 groupsites <- function(dfv,distance=16
                       ,wim.priority.sites=NULL
                       ,vds.priority.sites=NULL
