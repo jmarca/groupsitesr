@@ -76,11 +76,16 @@ match.sites <- function(target.sites,other.sites,distance,already.covered){
     close.idx <- target.other.km < distance
 
     while( sum(close.idx[,!already.covered]) > 0  ){
-        if(sum(!already.covered)==1){ ## edge case, else rowsums fails
-            convert.site <- which.min(already.covered)
+        if(dim(close.idx)[1]==1){
+            ## edge case, else rowsums fails
+            convert.site <- 1
         }else{
-            ranking <- rowSums(close.idx[,!already.covered])
-            convert.site <- which.max(ranking)
+            if(sum(!already.covered)==1){
+                convert.site <- which.min(already.covered)
+            }else{
+                ranking <- rowSums(close.idx[,!already.covered])
+                convert.site <- which.max(ranking)
+            }
         }
         new.sites.idx <- close.idx[convert.site,]
 

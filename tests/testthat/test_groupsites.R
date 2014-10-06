@@ -1,5 +1,6 @@
 res <- load(file='./wim.df.R')
 res <- load(file='./sample.data.1.R')
+res <- load(file='./sample.data.2.R')
 res <- load(file='./sample.data.30.R')
 res <- load(file='./sample.data.405.R')
 
@@ -164,6 +165,18 @@ test_that('groupsites works without a wim data set',{
                 equals(as.factor(
                   c(717799,718251,759427,771808,1214461,1218071)
                 )))
+
+    df.2.nowim <- groupsitesr::groupsites(as.data.frame(sample.data.2),16)
+    expect_that(dim(df),equals(c(14,18)))
+    expect_is(df,"data.frame")
+    expect_that(sum(is.na(df$group)),equals(0))
+
+    df.2.wim <- groupsitesr::groupsites(as.data.frame(sample.data.2),16,wim.df)
+
+    expect_that(dim(df),equals(c(14,18)))
+    expect_is(df,"data.frame")
+    expect_that(sum(is.na(df$group)),equals(0))
+    expect_that(df.2.wim,equals(df.2.nowim))
 
 })
 
