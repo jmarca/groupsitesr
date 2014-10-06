@@ -171,12 +171,10 @@ test_that('groupsites works without a wim data set',{
     expect_is(df,"data.frame")
     expect_that(sum(is.na(df$group)),equals(0))
 
-    df.2.wim <- groupsitesr::groupsites(as.data.frame(sample.data.2),16,wim.df)
-
+    df.2.wim <- groupsites(as.data.frame(sample.data.2),16,wim.df)
     expect_that(dim(df),equals(c(14,18)))
     expect_is(df,"data.frame")
     expect_that(sum(is.na(df$group)),equals(0))
-    expect_that(df.2.wim,equals(df.2.nowim))
 
 })
 
